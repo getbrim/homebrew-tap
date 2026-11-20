@@ -1,6 +1,6 @@
 cask "brim" do
-  version "1.0.9"
-  sha256 "b6036ff5d30b33f46923dfbda49a4e2a543c52cfcf415f66cb0b430ac23525f3"
+  version "1.0.10"
+  sha256 "a522ea888074c5a6dd5466ca2fe990cb66be3941490bf2f5327e5612183e4476"
 
   url "https://brim-ehw.pages.dev/downloads/Brim-#{version}.zip"
   name "Brim"
