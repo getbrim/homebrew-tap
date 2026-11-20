@@ -16,15 +16,19 @@ cask "brim" do
 
   auto_updates true
   depends_on arch: :arm64
-  depends_on macos: ">= :sequoia"
+  depends_on macos: :sequoia
 
   app "Brim.app"
   binary "#{appdir}/Brim.app/Contents/Helpers/brim"
 
   # Brim is signed with its own certificate but not notarized (that needs a paid Apple account),
   # so Gatekeeper would block the first launch of a quarantined copy. Same result as the curl installer.
-  postflight do
-    system_command "/usr/bin/xattr", args: ["-dr", "com.apple.quarantine", "#{appdir}/Brim.app"]
+  postflight_steps do
+    run "/usr/bin/xattr",
+        args:           ["-dr", "com.apple.quarantine", "Brim.app"],
+        chdir:          "{{appdir}}",
+        writable_paths: ["Brim.app"],
+        writable_base:  :appdir
   end
 
   uninstall quit: "dev.daniel.brim"
